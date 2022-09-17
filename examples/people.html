@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lxght &middot; People</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/raxracks/lxght/lxght.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+
+    <script>
+      w.people = [];
+      w.pName = "John Doe";
+      w.age = 20;
+
+      function createPerson() {
+        w.people = [...w.people, { name: pName, age }];
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      Name:
+      <input
+        value="{{ pName }}"
+        oninput="w.pName = event.target.value"
+        class="interactive"
+      />
+
+      <br /><br />
+
+      Age:
+      <input
+        value="{{ age }}"
+        oninput="w.age = +event.target.value"
+        type="number"
+        class="interactive"
+      />
+
+      <br /><br />
+
+      <button onclick="createPerson()" class="interactive">
+        Create Person
+      </button>
+
+      <br /><br />
+
+      <h1>People:</h1>
+      <embed-html
+        value="{{ Object.keys(people).map(personKey => `
+          <h1>${people[personKey].name}</h1>
+          <h2>${people[personKey].age}</h2>
+        `).join('') }}"
+      />
+    </div>
+  </body>
+</html>
