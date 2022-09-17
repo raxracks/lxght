@@ -11,15 +11,9 @@ const w = new Proxy(window, {
   },
 });
 
-let eh = () => {
-  document.querySelectorAll("embed-html").forEach((embeddedHTML) => {
-    embeddedHTML.innerHTML = parse(embeddedHTML.getAttribute("value"));
-  });
-};
-
-let update = (parent) => {
-  return new Promise((r, _) => {
-    let pEls = parent.querySelectorAll("*");
+let update = (p) => {
+  return new Promise((r) => {
+    let pEls = p.querySelectorAll("*");
 
     pEls.forEach((el) => {
       for (let node in el.childNodes) {
@@ -54,7 +48,7 @@ let parse = (t) => {
 
   m?.forEach((mv) => {
     let e = mv.slice(3, -3);
-    o = o.split(mv).join(eval(e));
+    o = o.split(mv).join(Function(`return ${e}`)());
   });
 
   return o;
@@ -63,15 +57,20 @@ let parse = (t) => {
 let render = () => {
   els.forEach((el) => {
     for (let node in el.lxd.nodes) {
-      el.childNodes[node].nodeValue = parse(el.lxd.nodes[node]);
+      let v = parse(el.lxd.nodes[node]);
+      if (el.childNodes[node].nodeValue !== v)
+        el.childNodes[node].nodeValue = v;
     }
 
     for (let prop in el.lxd.props) {
-      el[prop] = parse(el.lxd.props[prop]);
+      let v = parse(el.lxd.props[prop]);
+      if (el[prop] !== v) el[prop] = v;
     }
   });
 
-  eh();
+  document.querySelectorAll("embed-html").forEach((embeddedHTML) => {
+    embeddedHTML.innerHTML = parse(embeddedHTML.getAttribute("value"));
+  });
 };
 
 document.addEventListener("DOMContentLoaded", () => {
