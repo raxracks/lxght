@@ -20,23 +20,9 @@
 
       function counter() {
         return (
-          <div>
-            <h1>hello</h1>
-            <button class="interactive" onclick="w.count--">
-              -
-            </button>
-            <span>{{ count }}</span>
-            <button class="interactive" onclick="w.count++">
-              +
-            </button>
-
-            <br />
-            <br />
-
-            <button class="interactive" onclick="w.count++">
-              Count value: {{ count }}
-            </button>
-          </div>
+          <button class="interactive" onclick="w.count++">
+            Count value: {{ count }}
+          </button>
         );
       }
     </script>
@@ -45,10 +31,6 @@
   </head>
   <body>
     <div class="container">
-      <counter></counter>
-      <counter></counter>
-      <counter></counter>
-      <counter></counter>
       <counter></counter>
     </div>
   </body>

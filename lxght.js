@@ -75,7 +75,7 @@ let render = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   update(document.body).then(() => {
-    if (updateComponents) updateComponents();
+    if (w["updateComponents"]) updateComponents();
     render();
   });
 });
