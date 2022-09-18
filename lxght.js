@@ -1,4 +1,5 @@
 const els = [];
+const aos = [];
 const rem = new RegExp(/{{ .*? }}/g);
 const w = new Proxy(window, {
   set: (t, k, v) => {
@@ -11,7 +12,7 @@ const w = new Proxy(window, {
   },
 });
 
-let update = (p) => {
+let update = (p, cc = true) => {
   return new Promise((r) => {
     let pEls = p.querySelectorAll("*");
 
@@ -37,6 +38,13 @@ let update = (p) => {
         }
       }
     });
+
+    if (cc)
+      aos.forEach((ao) => {
+        try {
+          ao[0]();
+        } catch {}
+      });
 
     r();
   });
@@ -71,11 +79,18 @@ let render = () => {
   document.querySelectorAll("embed-html").forEach((embeddedHTML) => {
     embeddedHTML.innerHTML = parse(embeddedHTML.getAttribute("value"));
   });
+
+  aos.forEach((ao) => {
+    try {
+      ao[1]();
+    } catch {}
+  });
 };
+
+let registerAddon = (u, r) => aos.push([u, r]);
 
 document.addEventListener("DOMContentLoaded", () => {
   update(document.body).then(() => {
-    if (w["updateComponents"]) updateComponents();
     render();
   });
 });

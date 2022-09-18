@@ -3,8 +3,8 @@ function updateComponents() {
     let f = w[c.tagName.toLowerCase()];
     if (f) {
       c.innerHTML = f();
-      update(c.parentElement);
-      render();
     }
   });
 }
+
+registerAddon(updateComponents, updateComponents);
