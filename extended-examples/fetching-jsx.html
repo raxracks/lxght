@@ -7,6 +7,9 @@
     <title>Lxght &middot; Fetching</title>
 
     <script src="https://lxght-cdn.onrender.com/lxght.min.js"></script>
+    <script src="https://lxght-cdn.onrender.com/addons/component.min.js"></script>
+    <script src="https://lxght-cdn.onrender.com/addons/jsx.min.js"></script>
+
     <link rel="stylesheet" href="./style.css" />
 
     <script>
@@ -19,6 +22,25 @@
             w.ipInfo = json;
           });
         });
+      }
+    </script>
+
+    <script>
+      function ipinfo(key) {
+        return Object.keys(ipInfo)
+          .map((key) => ipinfosection(key))
+          .join("");
+      }
+    </script>
+
+    <script type="text/babel">
+      function ipinfosection(key) {
+        return (
+          <div class="container">
+            <h2>${key}</h2>
+            <h5>${ipInfo[key]}</h5>
+          </div>
+        );
       }
     </script>
   </head>
@@ -35,13 +57,6 @@
       </button>
     </div>
 
-    <embed-html
-      value="{{ Object.keys(ipInfo).map(key => `
-      <div class='container'>
-        <h2>${key}</h2>
-        <h5>${ipInfo[key]}</h5>
-      </div>
-      `).join('') }}"
-    ></embed-html>
+    <ipinfo></ipinfo>
   </body>
 </html>

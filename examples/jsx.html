@@ -1,0 +1,55 @@
+<!-- 
+    the jsx wrapper is very thin and not very capable, it still requires you to use lxght syntax 
+    but just lets you write html inside a script tag. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lxght &middot; Counter</title>
+
+    <script src="https://lxght-cdn.onrender.com/lxght.min.js"></script>
+    <script src="https://lxght-cdn.onrender.com/addons/component.min.js"></script>
+    <script src="https://lxght-cdn.onrender.com/addons/jsx.min.js"></script>
+
+    <script type="text/babel">
+      w.count = 0;
+
+      function counter() {
+        return (
+          <div>
+            <h1>hello</h1>
+            <button class="interactive" onclick="w.count--">
+              -
+            </button>
+            <span>{{ count }}</span>
+            <button class="interactive" onclick="w.count++">
+              +
+            </button>
+
+            <br />
+            <br />
+
+            <button class="interactive" onclick="w.count++">
+              Count value: {{ count }}
+            </button>
+          </div>
+        );
+      }
+    </script>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <counter></counter>
+      <counter></counter>
+      <counter></counter>
+      <counter></counter>
+      <counter></counter>
+    </div>
+  </body>
+</html>
