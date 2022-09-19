@@ -2,7 +2,7 @@
 A lightweight JS framework with no virtual DOM.
 
 ## Usage
-Use either the normal or minified version, which can be fetched from [jsdelivr](https://cdn.jsdelivr.net/gh/raxracks/lxght/lxght.min.js) and used in a script tag.  
+Use either the normal or minified version, which can be fetched from the [cdn](https://lxght-cdn.onrender.com/lxght.min.js) and used in a script tag.  
   
 Use `{{ expression }}` for templating, must have that exact whitespace.  
   
